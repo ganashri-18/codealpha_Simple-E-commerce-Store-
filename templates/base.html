@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ShopEasy</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        ShopEasy
+    </div>
+
+    <nav>
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'cart' %}">
+            Cart 🛒
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'orders' %}">
+                My Orders
+            </a>
+
+            <form
+                method="post"
+                action="{% url 'logout' %}"
+                style="display:inline"
+            >
+
+                {% csrf_token %}
+
+                <button>
+                    Logout
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 ShopEasy
+    </p>
+
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+    My Orders
+</h1>
+
+
+{% for order in orders %}
+
+<div class="order">
+
+    <h3>
+        Order #{{ order.id }}
+    </h3>
+
+    <p>
+        Total:
+        ₹{{ order.total_amount }}
+    </p>
+
+    <p>
+        Status:
+        <strong>
+            {{ order.status }}
+        </strong>
+    </p>
+
+    <p>
+        {{ order.created_at }}
+    </p>
+
+</div>
+
+{% empty %}
+
+<p>
+    You have no orders.
+</p>
+
+{% endfor %}
+
+{% endblock %}
